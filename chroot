@@ -1,0 +1,20 @@
+#!/bin/bash
+
+SET=/set
+# Configure
+
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+echo "KEYMAP=de-latin1" >> /etc/vconsole.conf
+
+ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
+pacman -S $(cat $SET/pkgs.lst | tr "\n" " " )
+
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=linux_boot 
+grub-mkconfig -o /boot/grub/grub.cfg 
+
+bash

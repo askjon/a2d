@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Has to be already mounted like in production
+TARGET=/mnt
+SET=dsk
+
+#root ?
+su
+
+mkdir $TARGET/set
+cp $SET/core.lst $TARGET/set
+cp $SET/pkgs.lst $TARGET/set
+cp chroot $TARGET/set
+
+pacstrap $TARGET $(cat $SET/core.lst)
+genfstab -U $TARGET >> $TARGET/etc/fstab
+
+arch-chroot /mnt < chroot
+

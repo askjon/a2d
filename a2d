@@ -12,8 +12,8 @@ cp $SET/core.lst $TARGET/set
 cp $SET/pkgs.lst $TARGET/set
 cp chroot $TARGET/set
 
-pacstrap $TARGET $(cat $SET/core.lst)
+pacstrap $TARGET $(cat $SET/core.lst | tr "\n" " " )
 genfstab -U $TARGET >> $TARGET/etc/fstab
 
-arch-chroot /mnt < chroot
+arch-chroot /mnt
 

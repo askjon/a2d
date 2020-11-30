@@ -3,4 +3,5 @@ base-devel
 linux-hardened
 linux-firmware
 grub
+efibootmgr
 vim

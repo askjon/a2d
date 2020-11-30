@@ -1,19 +1,25 @@
 #!/bin/bash
 
+# Installer
+
 # Has to be already mounted like in production
 TARGET=/mnt
 SET=dsk
 
 #root ?
-su
 
+echo "[$0] Copying configuration "
 mkdir $TARGET/set
 cp $SET/core.lst $TARGET/set
 cp $SET/pkgs.lst $TARGET/set
 cp chroot $TARGET/set
 
 pacstrap $TARGET $(cat $SET/core.lst | tr "\n" " " )
+echo "[$0] Generating fstab"
 genfstab -U $TARGET >> $TARGET/etc/fstab
 
+
+echo "[$0] Entering chroot"
 arch-chroot /mnt
 
+exit 0

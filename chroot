@@ -1,8 +1,12 @@
 #!/bin/bash
 
+# Chroot 
+# ! Dont start this an your own it needs the Installer to run first 
+
 SET=/set
 # Configure
 
+echo "[$0] Locale en_US "
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
@@ -10,11 +14,17 @@ locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "KEYMAP=de-latin1" >> /etc/vconsole.conf
 
+echo "[$0] Timezone Europe/Berlin "
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
+echo "[$0] Installing pkgs"
 pacman -S $(cat $SET/pkgs.lst | tr "\n" " " )
 
+echo "[$0] Installing bootloader"
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=linux_boot 
 grub-mkconfig -o /boot/grub/grub.cfg 
 
-bash
+echo "[$0|USER] Enter root Password blow:"
+passwd
+
+exit 0

@@ -18,9 +18,9 @@ git
 acpi
 
 xorg-server
-xorg-xclip
 xorg-xinit
 xorg-setxkbmap
+xclip
 
 
 bspwm

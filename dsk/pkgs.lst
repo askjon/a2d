@@ -20,12 +20,13 @@ acpi
 xorg-server
 xorg-xinit
 xorg-setxkbmap
+xorg-xset
 xclip
-
 
 bspwm
 sxhkd
 
+zsh
 rxvt-unicode
 firefox
 pavucontrol
